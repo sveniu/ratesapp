@@ -5,6 +5,7 @@ FROM ubuntu:16.04
 # Install pip and Gunicorn.
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
 	python-pip
+RUN pip install --upgrade pip
 RUN pip install -U \
 	gunicorn
 
