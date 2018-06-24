@@ -1,0 +1,7 @@
+# Use official image from https://hub.docker.com/_/postgres/
+FROM postgres:9.6
+
+# Auto-load files (*.sql, *.sh) upon container start.
+ADD \
+	rates.sql \
+	/docker-entrypoint-initdb.d/
