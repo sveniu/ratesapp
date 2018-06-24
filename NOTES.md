@@ -39,6 +39,8 @@ the base cluster controllers available for you to use.
 
 ### System design
 
+![Diagram](https://github.com/sveniu/ratesapp/raw/master/diagram.png)
+
 A setup with a read/write database master and one or more read replicas
 across availability zones and regions, can provide a good starting point for
 a system that can scale out read capacity while being resilient to failure;
