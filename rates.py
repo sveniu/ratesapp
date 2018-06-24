@@ -1,5 +1,6 @@
 import psycopg2
 from datetime import datetime
+import backoff
 
 from flask import Flask, request, jsonify
 from psycopg2.extras import DictCursor
@@ -8,6 +9,10 @@ from werkzeug.exceptions import BadRequest
 import config
 
 
+@backoff.on_exception(backoff.expo,
+                      psycopg2.OperationalError,
+                      max_value=10,
+                      max_time=60)
 def get_db_conn(db_config):
     """ Create a database connection. """
     return psycopg2.connect(
