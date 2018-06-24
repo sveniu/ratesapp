@@ -7,6 +7,9 @@ services:
     image: ratesdb:dev
     ports:
      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
   api:
     build:
       context: .
@@ -16,3 +19,7 @@ services:
      - "3000:3000"
     depends_on:
     - "db"
+    environment:
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_HOST=db
