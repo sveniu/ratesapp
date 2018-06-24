@@ -1,0 +1,25 @@
+# Use Ubuntu Trusty LTS as a safe default. This can be switched for something
+# newer and/or smaller (like Alpine) depending on needs.
+FROM ubuntu:16.04
+
+# Install pip and Gunicorn.
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
+	python-pip
+RUN pip install -U \
+	gunicorn
+
+# Install requirements.
+RUN mkdir /app
+ADD requirements.txt /app/
+RUN pip install -Ur /app/requirements.txt
+
+# Add application files after software install, to increase Docker build cache
+# hit ratio.
+ADD \
+	config.py \
+	rates.py \
+	requirements.txt \
+	wsgi.py /app/
+
+WORKDIR /app
+CMD ["gunicorn", "-b", ":3000", "wsgi"]
