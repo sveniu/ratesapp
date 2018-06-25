@@ -123,3 +123,10 @@ Going further, a [deployment
 manifest](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment)
 can be used to control deployed resources like replica counts, CPU/memory
 limits, etc.
+
+## Additional notes
+
+* A backoff was added to the database connect call in
+  c043932b7e9ae036d05609fad4a8f4c82526619a
+* The database config is taken from the environment since
+  aeda47badfee4cd873523a0e44e8f53f31cc5e23
